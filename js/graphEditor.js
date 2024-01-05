@@ -84,4 +84,10 @@ class GraphEditor {
       this.selected.draw(this.ctx, { outline: true })
     }
   }
+
+  dispose() {
+    this.graph.dispose()
+    this.selected = null
+    this.hovered = null
+  }
 }
