@@ -26,3 +26,19 @@ function subtract(p1, p2) {
 function scale(p, scalar) {
   return new Point(p.x * scalar, p.y * scalar)
 }
+
+function translate(loc, angle, offset) {
+  return new Point(
+    loc.x + Math.cos(angle) * offset,
+    loc.y + Math.sin(angle) * offset
+  )
+}
+
+function angle(p) {
+  return Math.atan2(p.y, p.x)
+}
+
+function getIntersection(A, B, C, D) {
+  const tTop = (D.x - C.x) * (A.y - C.y) - (D.y - C.y) * (A.x - C.x)
+  const uTop = (C.y - A.y) * (A.x - B.x) - (C.x - A.x) * (A.y - B.y)
+}
