@@ -23,6 +23,9 @@ class World {
     for (const env of this.envelopes) {
       env.draw(ctx, { fill: '#BBB', stroke: '#BBB', lineWidth: 15 })
     }
+    for (const seg of this.graph.segments) {
+      seg.draw(ctx, { color: 'white', width: 4, dash: [10, 10] })
+    }
     for (const seg of this.roadBorders) {
       seg.draw(ctx, { color: 'white', width: 4 })
     }
