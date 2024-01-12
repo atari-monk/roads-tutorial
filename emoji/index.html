@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Emojis</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 20px;
+      }
+
+      p {
+        margin: 10px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input {
+        padding: 5px;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 8px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function generateEmojiObjects(startCodePoint, endCodePoint) {
+        const emojiObjects = []
+        for (
+          let codePoint = startCodePoint;
+          codePoint <= endCodePoint;
+          codePoint++
+        ) {
+          // Ignore emojis with code points from 127491 to 127503
+          if (codePoint >= 127491 && codePoint <= 127503) {
+            continue
+          }
+          if (codePoint >= 127547 && codePoint <= 127551) {
+            continue
+          }
+          if (codePoint >= 127561 && codePoint <= 127567) {
+            continue
+          }
+          if (codePoint >= 127570 && codePoint <= 127743) {
+            continue
+          }
+          if (codePoint >= 128765 && codePoint <= 128767) {
+            continue
+          }
+          if (codePoint >= 128884 && codePoint <= 128895) {
+            continue
+          }
+          if (codePoint >= 128981 && codePoint <= 128991) {
+            continue
+          }
+          if (codePoint >= 129009 && codePoint <= 129023) {
+            continue
+          }
+          if (codePoint >= 129096 && codePoint <= 129103) {
+            continue
+          }
+          if (codePoint >= 129198 && codePoint <= 129291) {
+            continue
+          }
+
+          const emoji = String.fromCodePoint(codePoint)
+          const htmlEntity = `&#${codePoint};`
+          const description = '' // Add the actual description for the emoji
+          const emojiObject = {
+            emoji: emoji,
+            description: description,
+            decimal: codePoint,
+          }
+
+          emojiObjects.push(emojiObject)
+        }
+        return emojiObjects
+      }
+
+      function displayEmojiObjects(start, end) {
+        // Parse start and end as integers
+        const startCodePoint = parseInt(start)
+        const endCodePoint = parseInt(end)
+
+        if (isNaN(startCodePoint) || isNaN(endCodePoint)) {
+          alert('Please enter valid numbers for the start and end code points.')
+          return
+        }
+
+        // Clear existing content
+        const body = document.body
+        body.innerHTML = ''
+
+        // Display the input fields
+        const startLabel = document.createElement('label')
+        startLabel.innerHTML = 'Start Code Point:'
+        body.appendChild(startLabel)
+        const startInput = document.createElement('input')
+        startInput.type = 'text'
+        startInput.value = startCodePoint
+        body.appendChild(startInput)
+
+        const endLabel = document.createElement('label')
+        endLabel.innerHTML = 'End Code Point:'
+        body.appendChild(endLabel)
+        const endInput = document.createElement('input')
+        endInput.type = 'text'
+        endInput.value = endCodePoint
+        body.appendChild(endInput)
+
+        const filterButton = document.createElement('button')
+        filterButton.innerHTML = 'Filter'
+        filterButton.onclick = function () {
+          const newStart = startInput.value
+          const newEnd = endInput.value
+          displayEmojiObjects(newStart, newEnd)
+        }
+        body.appendChild(filterButton)
+
+        // Display the generated emoji objects in a grid
+        const gridContainer = document.createElement('div')
+        gridContainer.style.display = 'grid'
+        gridContainer.style.gridTemplateColumns =
+          'repeat(auto-fill, minmax(80px, 1fr))'
+        gridContainer.style.gridGap = '10px'
+        body.appendChild(gridContainer)
+
+        const emojiObjects = generateEmojiObjects(startCodePoint, endCodePoint)
+        emojiObjects.forEach((emojiObject) => {
+          const gridItem = document.createElement('div')
+          gridItem.style.textAlign = 'center'
+          gridItem.innerHTML = `${emojiObject.emoji} <br> ${emojiObject.description} <br> ${emojiObject.decimal}`
+          gridContainer.appendChild(gridItem)
+        })
+      }
+
+      // Initial range of Unicode code points for emojis
+      const initialStartCodePoint = 127484 // Adjusted starting code point
+      const initialEndCodePoint = 129535
+
+      // Display emoji objects with the initial range
+      displayEmojiObjects(initialStartCodePoint, initialEndCodePoint)
+    </script>
+  </body>
+</html>
