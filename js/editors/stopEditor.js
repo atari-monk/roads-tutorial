@@ -5,6 +5,9 @@ class StopEditor {
 
     this.canvas = viewport.canvas
     this.ctx = this.canvas.getContext('2d')
+
+    this.mouse = null
+    this.intent = null
   }
 
   enable() {
@@ -34,8 +37,31 @@ class StopEditor {
     this.mouse = this.viewport.getMouse(evt, true)
     const seg = getNearestSegment(
       this.mouse,
-      this.world.graph.segments,
+      this.world.laneGuides,
       10 * this.viewport.zoom
     )
+    if (seg) {
+      const proj = seg.projectPoint(this.mouse)
+      if (proj.offset >= 0 && proj.offset <= 1) {
+        this.intent = new Stop(
+          proj.point,
+          seg.directionVector(),
+          world.roadWidth / 2,
+          world.roadWidth / 2
+        )
+      } else {
+        this.intent = null
+      }
+    } else {
+      this.intent = null
+    }
+  }
+
+  #handleMouseDown(evt) {}
+
+  display() {
+    if (this.intent) {
+      this.intent.draw(this.ctx)
+    }
   }
 }
