@@ -13,6 +13,7 @@
       &nbsp;
       <button id="graphBtn" onclick="setMode('graph')">🌐</button>
       <button id="stopBtn" onclick="setMode('stop')">🛑</button>
+      <button id="crossingBtn" onclick="setMode('crossing')">🚶</button>
     </div>
 
     <script src="../js/world.js"></script>
@@ -64,6 +65,7 @@
 
       function dispose() {
         graphEditor.dispose()
+        world.markings.length = 0
       }
 
       function save() {
