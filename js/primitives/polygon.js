@@ -7,12 +7,8 @@ class Polygon {
     }
   }
 
-  static multiBreak(polys) {
-    for (let i = 0; i < polys.length - 1; i++) {
-      for (let j = i + 1; j < polys.length; j++) {
-        Polygon.break(polys[i], polys[j])
-      }
-    }
+  static load(info) {
+    return new Polygon(info.points.map((i) => new Point(i.x, i.y)))
   }
 
   static union(polys) {
@@ -35,6 +31,14 @@ class Polygon {
       }
     }
     return keptSegments
+  }
+
+  static multiBreak(polys) {
+    for (let i = 0; i < polys.length - 1; i++) {
+      for (let j = i + 1; j < polys.length; j++) {
+        Polygon.break(polys[i], polys[j])
+      }
+    }
   }
 
   distanceToPoint(point) {
