@@ -3,6 +3,7 @@ class Stop extends Marking {
     super(center, directionVector, width, heigth)
 
     this.border = this.poly.segments[2]
+    this.type = 'stop'
   }
 
   draw(ctx) {
